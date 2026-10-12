@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useState } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
@@ -11,8 +11,10 @@ import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 // react-pdf renders PDFs via pdf.js, which needs its own worker script.
 // Loading it from a CDN (matching react-pdf's bundled pdfjs-dist version)
 // avoids having to hand-configure a bundler-specific worker asset.
-pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
-
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url
+).toString();
 /**
  * fileData: ArrayBuffer of the PDF (already fetched with authentication
  * by ReaderPage — this component never talks to the network itself).

@@ -30,7 +30,7 @@ router.get('/mine', protect, authorize('author', 'admin'), listMyBooks);
 router.get('/:id', bookIdValidator, validate, optionalAuth, getBookById);
 router.get('/:id/file', bookIdValidator, validate, protect, streamBookFile);
 
-router.post('/', protect, authorize('author'), uploadBookFiles, createBookValidator, validate, createBook);
+router.post('/', protect, authorize('author', 'admin'), uploadBookFiles, createBookValidator, validate, createBook);
 router.put('/:id', protect, authorize('author', 'admin'), uploadBookFiles, updateBookValidator, validate, updateBook);
 router.delete('/:id', protect, authorize('author', 'admin'), bookIdValidator, validate, deleteBook);
 

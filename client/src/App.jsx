@@ -1,3 +1,4 @@
+
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
@@ -24,6 +25,7 @@ import RoleRoute from './routes/RoleRoute';
 export default function App() {
   return (
     <>
+      
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />

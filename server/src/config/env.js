@@ -31,5 +31,5 @@ module.exports = {
   },
   maxAvatarSizeMb: Number(process.env.MAX_AVATAR_SIZE_MB || 2),
   maxCoverSizeMb: Number(process.env.MAX_COVER_SIZE_MB || 3),
-  maxEbookSizeMb: Number(process.env.MAX_EBOOK_SIZE_MB || 50),
+  maxEbookSizeMb: Number(process.env.MAX_EBOOK_SIZE_MB || 1000),
 };

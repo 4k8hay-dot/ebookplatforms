@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema(
     },
     googleId: {
       type: String,
-      default: null,
+      // default: null,
     },
     profileImage: {
       type: String,
@@ -89,8 +89,10 @@ const userSchema = new mongoose.Schema(
 // sparse: true means the unique constraint only applies to documents that
 // actually HAVE a googleId — otherwise every email/password-only account
 // (googleId: null) would collide on the same "null" value.
-userSchema.index({ googleId: 1 }, { unique: true, sparse: true });
-
+userSchema.index(
+  { googleId: 1 },
+  { unique: true, partialFilterExpression: { googleId: { $type: 'string' } } }
+);
 // Hash the password whenever it is newly set/changed (FR-AUTH-03, BR-02).
 // We hash a virtual "password" field on the way in rather than exposing
 // passwordHash directly to controllers, so controllers never handle raw
